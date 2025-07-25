@@ -12,6 +12,3 @@ variable "proxmox_token_secret" {
   sensitive   = true
 }
 
-variable "pm_node" {
-  type        = string
-}
