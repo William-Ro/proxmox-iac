@@ -4,7 +4,7 @@ variable "proxmox_url" {
 
 variable "proxmox_token_id" {
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "proxmox_token_secret" {
