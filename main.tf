@@ -1,43 +1,45 @@
 provider "proxmox" {
-  pm_api_url      = var.pm_api_url
-  pm_user         = var.pm_user
-  pm_api_token    = var.pm_token
+  pm_api_url= var.proxmox_url
+  pm_api_token_id = var.proxmox_token_id
+  pm_api_token_secret = var.proxmox_token_secret
   pm_tls_insecure = true
 }
 
 resource "proxmox_vm_qemu" "ubuntu_vm" {
+  # General Settings
   name        = "vm-devops-1"
-  target_node = var.pm_node
+  desc        = "description"
+  agent       = 1
+
+  target_node = "pve"
+
   clone       = "ubuntu" # Ensure this template exists
   full_clone  = true
 
-  os_type     = "cloud-init" # Use cloud-init for easier configuration
+  onboot      = true
 
-  cores       = 2
-  sockets     = 1
+  # VM Configuration
+
   memory      = 2048
-  scsihw      = "virtio-scsi-pci"
-  boot        = "cdn"
-  bootdisk    = "scsi0"
 
+  cpu {
+    type      = "host"
+    sockets   = 1
+    cores     = 2
+  }
   disk {
-    slot     = 0
-    size     = "10G"
-    type     = "scsi"
-    storage  = "local-lvm"
-    iothread = true
+    slot      = "scsi0"
+    size      = "20G"
+    storage   = "local"
+    iothread  = true
+    replicate = false
   }
-
   network {
-    model = "virtio"
-    bridge = "vmbr0"
+    id        = 0
+    model     = "virtio"
+    bridge    = "vmbr0"
   }
-  ipconfig0 = "ip=dhcp"
-
-  ciuser     = "ubuntu"
-  cipassword = "changeme" 
-
-  # Autoencendido
-  onboot = true
+ 
 }
+
 
