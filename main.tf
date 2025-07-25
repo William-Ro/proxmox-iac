@@ -9,7 +9,6 @@ resource "proxmox_vm_qemu" "ubuntu_vm" {
   # General Settings
   name        = "vm-devops-1"
   desc        = "description"
-  agent       = 1
 
   target_node = "pve"
 
