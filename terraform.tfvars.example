@@ -1,0 +1,22 @@
+# Proxmox Infrastructure as Code - Configuration Template
+# 
+# Copy this file to terraform.tfvars and update the values with your Proxmox server details.
+# IMPORTANT: Never commit terraform.tfvars to version control as it contains sensitive information.
+
+# Proxmox API URL
+# Format: https://your-proxmox-server:8006/api2/json
+# Replace with your actual Proxmox server IP or hostname
+proxmox_url = "https://192.168.1.100:8006/api2/json"
+
+# Proxmox API Token ID
+# Format: username@pam!token-name
+# Example: root@pam!terraform-token
+# Replace with your actual token ID
+proxmox_token_id = "root@pam!terraform-token"
+
+# Proxmox API Token Secret
+# This is the secret key for your API token
+# Replace with your actual token secret
+proxmox_token_secret = "your-token-secret-here"
+
+
